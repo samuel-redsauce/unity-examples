@@ -19,6 +19,16 @@ public class PlayerController : MonoBehaviour
 
 	private float nextFire;
 
+	void Update()
+	{
+		if (Input.GetButton("Fire1") && Time.time > nextFire)
+		{
+			nextFire = Time.time + fireRate;
+			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+			audio.Play ();
+		}
+	}
+
 
 	void FixedUpdate() 
 	{
@@ -38,12 +48,4 @@ public class PlayerController : MonoBehaviour
 		rigidbody.rotation = Quaternion.Euler (0.0f, 0.0f, rigidbody.velocity.x * -tilt);
 	}
 
-	void Update()
-	{
-		if (Input.GetButton("Fire1") && Time.time > nextFire)
-		{
-			nextFire = Time.time + fireRate;
-			Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
-		}
-	}
 }
